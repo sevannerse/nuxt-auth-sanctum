@@ -68,6 +68,11 @@ export interface RedirectOptions {
      */
     onAuthOnly: string | false;
     /**
+     * Route to redirect to when user has to be verified.
+     * If set to false, the plugin will throw an 403 error.
+     */
+    onVerifyOnly: string | false;
+    /**
      * Route to redirect to when user has to be a guest.
      * If set to false, the plugin will throw an 403 error.
      */

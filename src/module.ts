@@ -39,6 +39,7 @@ export default defineNuxtModule<SanctumModuleOptions>({
             onLogin: '/',
             onLogout: '/',
             onAuthOnly: '/login',
+            onVerifyOnly: '/verify',
             onGuestOnly: '/',
         },
     },

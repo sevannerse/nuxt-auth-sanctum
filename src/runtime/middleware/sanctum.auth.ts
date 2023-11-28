@@ -14,11 +14,25 @@ export default defineNuxtRouteMiddleware((to) => {
 
     const isAuthenticated = user.value !== null;
 
-    if (isAuthenticated === true) {
+    const isVerified = user.value.email_verified_at !== null;
+
+    if (isAuthenticated === true && isVerified === true) {
         return;
     }
 
-    const endpoint = options.redirect.onAuthOnly;
+    const determineEndpoint = (): string | false => {
+        if (isAuthenticated === false) {
+            return options.redirect.onAuthOnly;
+        }
+
+        if (isVerified === false) {
+            return options.redirect.onVerifyOnly;
+        }
+
+        return false;
+    }
+
+    const endpoint = determineEndpoint();
 
     if (endpoint === false) {
         throw createError({ statusCode: 403 });
